@@ -62,6 +62,12 @@ public final class StorageException extends BaseServiceException {
   }
 
   @Override
+  protected boolean isRetryable(boolean idempotent, IOException exception) {
+    return super.isRetryable(idempotent, exception)
+        || "insufficient data written".equals(exception.getMessage());
+  }
+
+  @Override
   protected Set<Error> retryableErrors() {
     return RETRYABLE_ERRORS;
   }

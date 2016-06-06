@@ -112,6 +112,15 @@ public class StorageExceptionTest {
     assertFalse(exception.retryable());
     assertTrue(exception.idempotent());
     assertSame(cause, exception.getCause());
+
+    cause = new IOException("insufficient data written");
+    exception = new StorageException(cause);
+    assertEquals(StorageException.UNKNOWN_CODE, exception.code());
+    assertEquals("insufficient data written", exception.getMessage());
+    assertNull(exception.reason());
+    assertTrue(exception.retryable());
+    assertTrue(exception.idempotent());
+    assertSame(cause, exception.getCause());
   }
 
   @Test
