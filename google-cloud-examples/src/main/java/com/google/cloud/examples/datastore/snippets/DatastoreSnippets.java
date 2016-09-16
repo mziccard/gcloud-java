@@ -33,7 +33,6 @@ import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StructuredQuery;
-import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
 import com.google.common.collect.Lists;
 
 import java.util.Iterator;
@@ -53,7 +52,7 @@ public class DatastoreSnippets {
   /**
    * Example of running in a transaction.
    */
-  // [TARGET runInTransaction(TransactionCallable<T> callable)]
+  // [TARGET runInTransaction(TransactionCallable)]
   // [VARIABLE "my_callable_result"]
   public String runInTransaction(final String callableResult) {
     // [START runInTransaction]
@@ -91,7 +90,7 @@ public class DatastoreSnippets {
   /**
    * Example of allocating an id
    */
-  // [TARGET allocateId(IncompleteKey key)]
+  // [TARGET allocateId(IncompleteKey)]
   public Key allocateIdSingle() {
     // [START allocateIdSingle]
     KeyFactory keyFactory = datastore.newKeyFactory().kind("MyClass");
@@ -106,7 +105,7 @@ public class DatastoreSnippets {
   /**
    * Example of allocating multiple ids in a single batch
    */
-  // [TARGET allocateId(IncompleteKey... keys)]
+  // [TARGET allocateId(IncompleteKey...)]
   public List<Key> batchAllocateId() {
     // [START batchAllocateId]
     KeyFactory keyFactory = datastore.newKeyFactory().kind("MyClass");
@@ -122,8 +121,9 @@ public class DatastoreSnippets {
   /**
    * Example of updating multiple entities
    */
-  // [TARGET update(Entity... entities)]
-  // [VARIABLE "my_key_name"]
+  // [TARGET update(Entity...)]
+  // [VARIABLE "my_key_name1"]
+  // [VARIABLE "my_key_name2"]
   public void batchUpdateEntities(String keyName1, String keyName2) {
     // [START batchUpdateEntities]
     Key key1 = datastore.newKeyFactory().kind("MyClass").newKey(keyName1);
@@ -143,7 +143,7 @@ public class DatastoreSnippets {
   /**
    * Example of putting a single entity
    */
-  // [TARGET put(FullEntity<?> entity)]
+  // [TARGET put(FullEntity)]
   // [VARIABLE "my_key_name"]
   public void putSingleEntity(String keyName) {
     // [START putSingleEntity]
@@ -158,7 +158,7 @@ public class DatastoreSnippets {
   /**
    * Example of putting multiple entities
    */
-  // [TARGET put(FullEntity<?>... entity)]
+  // [TARGET put(FullEntity...)]
   // [VARIABLE "my_key_name1"]
   // [VARIABLE "my_key_name2"]
   public void batchPutEntities(String keyName1, String keyName2) {
@@ -180,7 +180,7 @@ public class DatastoreSnippets {
   /**
    * Example of deleting multiplie entities
    */
-  // [TARGET delete(Key... keys)]
+  // [TARGET delete(Key...)]
   // [VARIABLE "my_key_name1"]
   // [VARIABLE "my_key_name2"]
   public void batchDeleteEntities(String keyName1, String keyName2) {
@@ -205,7 +205,7 @@ public class DatastoreSnippets {
   /**
    * Example of getting an Entity.
    */
-  // [TARGET get(Key key, ReadOption... options)]
+  // [TARGET get(Key, ReadOption...)]
   // [VARIABLE "my_key_name"]
   public Entity getEntityWithKey(String keyName) {
     // [START getEntityWithKey]
@@ -219,7 +219,7 @@ public class DatastoreSnippets {
   /**
    * Example of getting multiple Entity objects.
    */
-  // [TARGET get(Iterable<Key> key, ReadOption... options)]
+  // [TARGET get(Iterable, ReadOption...)]
   // [VARIABLE "my_first_key_name"]
   // [VARIABLE "my_second_key_name"]
   public List<Entity> getEntitiesWithKeys(String firstKeyName, String secondKeyName) {
@@ -243,7 +243,7 @@ public class DatastoreSnippets {
   /**
    * Example of fetching a list of Entity objects.
    */
-  // [TARGET fetch(Iterable<Key> key, ReadOption... options)]
+  // [TARGET fetch(Iterable, ReadOption...)]
   // [VARIABLE "my_first_key_name"]
   // [VARIABLE "my_second_key_name"]
   public List<Entity> fetchEntitiesWithKeys(String firstKeyName, String secondKeyName) {
@@ -262,7 +262,7 @@ public class DatastoreSnippets {
   /**
    * Example of running a query to find all keys of one kind.
    */
-  // [TARGET run(Query<T> query, ReadOption... options)]
+  // [TARGET run(Query, ReadOption...)]
   // [VARIABLE "my_kind"]
   public List<Entity> runQuery(String kind) {
     // [START runQuery]
@@ -282,5 +282,4 @@ public class DatastoreSnippets {
     // [END runQuery]
     return entities;
   }
-
 }
